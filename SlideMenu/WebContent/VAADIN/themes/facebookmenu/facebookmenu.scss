@@ -1,0 +1,36 @@
+
+
+@mixin facebookmenu {
+
+  // Insert your own theme rules here
+  
+	.menuwindow {
+		background-color: #ccc;
+  
+		.v-window-outerheader {
+			display:none;
+		}
+		
+		.v-window-contents {
+			background-color: #ccc;
+		}
+		
+		.loading {
+			font-size: 36px;
+			height: auto;
+			line-height: 43px;
+			text-align: center;
+			margin-top: 100px;
+		}
+		
+		.modalcurtain {
+			left: 100%;
+			top: 0;
+			width: 200%;
+			height: 100%;
+			background-color: rgba(0,0,0,0.1);
+			position: absolute;
+			overflow: hidden;
+		}
+	}
+}
