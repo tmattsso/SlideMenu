@@ -10,7 +10,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 
 @SuppressWarnings("serial")
-@Theme("facebookmenu")
+@Theme("slidemenu")
 public class FacebookmenuUI extends UI {
 
 	@WebServlet(value = "/*", asyncSupported = true)
