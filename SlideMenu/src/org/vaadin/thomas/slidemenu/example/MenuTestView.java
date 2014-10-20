@@ -55,6 +55,6 @@ public class MenuTestView extends SlideMenuView {
 			}
 		});
 
-		getMenu().setWidth("90%");
+		getMenu().setWidth("50%");
 	}
 }

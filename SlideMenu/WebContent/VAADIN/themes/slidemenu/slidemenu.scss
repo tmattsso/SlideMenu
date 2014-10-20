@@ -33,12 +33,11 @@
 			overflow: hidden;
 		}
 		
+  		transition: transform 500ms;
 	}
-		.menuwindow.opening {
-			margin-left:0px !important;
-		}
-		
-		.menuwindow.closing {
-			margin-left: -90% !important;
-		}
+	
+	.menuwindow.opening {
+		transform: translate3d(100%, 0,0);
+	}
+	
 }

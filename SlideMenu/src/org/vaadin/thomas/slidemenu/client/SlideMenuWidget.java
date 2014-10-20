@@ -3,34 +3,25 @@ package org.vaadin.thomas.slidemenu.client;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
+import com.google.gwt.user.client.Timer;
 import com.vaadin.client.ui.VWindow;
 
 public class SlideMenuWidget extends VWindow {
 
-	protected int widthPercentage = 80;
-
-	protected int numFramesForAnimation = 15;
-
 	private Element curtain;
 
-	private Style style;
-
 	private static final String STYLE_OPENING = "opening";
-	private static final String STYLE_CLOSING = "closing";
 
 	private final boolean isOpen = false;
 	private final boolean isMoving = false;
 
-	// private final AnimationCallback menuOpenAnimation = new
-	// MenuAnimation(true);
-	// private final AnimationCallback menuCloseAnimation = new MenuAnimation(
-	// false);
-	// private int currentPos = -widthPercentage;
+	private int width = 90;
+	private Unit widthUnit = Unit.PCT;
 
 	private MenuServerRPC listener;
 
@@ -57,67 +48,40 @@ public class SlideMenuWidget extends VWindow {
 			}
 		});
 
-		getElement().addClassName(STYLE_CLOSING);
 	}
 
 	@Override
 	protected void onAttach() {
 		super.onAttach();
-
-		style = getElement().getStyle();
 		curtain = getElement().appendChild(curtain);
 
-		// getElement().getStyle().setMarginLeft(-widthPercentage, Unit.PCT);
-	}
+		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 
-	public int getWidthPercentage() {
-		return widthPercentage;
+			@Override
+			public void execute() {
+				getElement().getStyle().setLeft(-width, widthUnit);
+			}
+		});
 	}
 
 	@Override
 	public void setWidth(String width) {
 		super.setWidth(width);
 
-		int w = -1;
-
-		// only support percentages
 		if (width.contains("%")) {
-			if (width.startsWith("100")) {
-				w = 100;
-			} else {
-				width = width.substring(0, 2);
-				w = Integer.parseInt(width);
-			}
-			setWidthPercentage(w);
+			widthUnit = Unit.PCT;
+		} else {
+			widthUnit = Unit.PX;
 		}
-	}
 
-	/**
-	 * Set the width of the menu, in percentage of the screen width. Default is
-	 * 80.
-	 *
-	 * @param widthPercentage
-	 */
-	public void setWidthPercentage(int widthPercentage) {
-		this.widthPercentage = widthPercentage;
+		if (width.startsWith("100")) {
+			this.width = 100;
+		} else {
+			width = width.substring(0, 2);
+			this.width = Integer.parseInt(width);
+		}
 
-		// // reset for next animation
-		// if (!isOpen) {
-		// currentPos = -widthPercentage;
-		// }
-	}
-
-	public int getNumFramesForAnimation() {
-		return numFramesForAnimation;
-	}
-
-	/**
-	 * How many frames the menu animation should be split into. Default is 15.
-	 *
-	 * @param numFramesForAnimation
-	 */
-	public void setNumFramesForAnimation(int numFramesForAnimation) {
-		this.numFramesForAnimation = numFramesForAnimation;
+		getElement().getStyle().setLeft(-this.width, widthUnit);
 	}
 
 	public boolean isOpen() {
@@ -126,26 +90,21 @@ public class SlideMenuWidget extends VWindow {
 
 	protected void open() {
 
-		getElement().removeClassName(STYLE_CLOSING);
 		getElement().addClassName(STYLE_OPENING);
-		// AnimationScheduler.get().requestAnimationFrame(menuOpenAnimation,
-		// getWidget().getElement());
 
-		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+		new Timer() {
 
 			@Override
-			public void execute() {
+			public void run() {
 				listener.menuOpened();
 			}
-		});
+
+		}.schedule(500);
 	}
 
 	protected void close() {
 
 		getElement().removeClassName(STYLE_OPENING);
-		getElement().addClassName(STYLE_CLOSING);
-		// AnimationScheduler.get().requestAnimationFrame(menuCloseAnimation,
-		// getWidget().getElement());
 
 		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 
@@ -163,68 +122,5 @@ public class SlideMenuWidget extends VWindow {
 	public void setListener(MenuServerRPC listener) {
 		this.listener = listener;
 	}
-
-	// private final class MenuAnimation implements AnimationCallback {
-	// private final boolean right;
-	// private int hasMoved = 0;
-	//
-	// public MenuAnimation(boolean right) {
-	// this.right = right;
-	// }
-	//
-	// @Override
-	// public void execute(double timestamp) {
-	//
-	// curtain.getStyle().setVisibility(Visibility.VISIBLE);
-	// isMoving = true;
-	//
-	// final boolean shouldMove = right && currentPos < 0 || !right
-	// && currentPos > -widthPercentage;
-	//
-	// if (shouldMove) {
-	// final int movePerFrame = getMovePerFrame(hasMoved);
-	// hasMoved += movePerFrame;
-	//
-	// if (right) {
-	// currentPos += movePerFrame;
-	// } else {
-	// currentPos -= movePerFrame;
-	// }
-	//
-	// style.setMarginLeft(currentPos, Unit.PCT);
-	// AnimationScheduler.get().requestAnimationFrame(this,
-	// getWidget().getElement());
-	// } else {
-	// if (right) {
-	// style.setMarginLeft(0, Unit.PX);
-	// currentPos = 0;
-	// } else {
-	// currentPos = -widthPercentage;
-	// style.setMarginLeft(-widthPercentage, Unit.PCT);
-	// }
-	//
-	// isMoving = false;
-	// hasMoved = 0;
-	//
-	// if (right) {
-	// isOpen = true;
-	// curtain.getStyle().setVisibility(Visibility.VISIBLE);
-	// listener.menuOpened();
-	// } else {
-	// isOpen = false;
-	// curtain.getStyle().setVisibility(Visibility.HIDDEN);
-	// listener.menuClosed();
-	// }
-	// }
-	// }
-	//
-	// private int getMovePerFrame(int current) {
-	// int i = widthPercentage / numFramesForAnimation;
-	// if (current + i > widthPercentage) {
-	// i = widthPercentage - current;
-	// }
-	// return i;
-	// }
-	// }
 
 }
