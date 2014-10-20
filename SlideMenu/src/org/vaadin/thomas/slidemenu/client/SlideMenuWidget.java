@@ -55,13 +55,7 @@ public class SlideMenuWidget extends VWindow {
 		super.onAttach();
 		curtain = getElement().appendChild(curtain);
 
-		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-
-			@Override
-			public void execute() {
-				getElement().getStyle().setLeft(-width, widthUnit);
-			}
-		});
+		getElement().getStyle().setLeft(-width, widthUnit);
 	}
 
 	@Override
@@ -96,6 +90,7 @@ public class SlideMenuWidget extends VWindow {
 
 			@Override
 			public void run() {
+				curtain.getStyle().setVisibility(Visibility.VISIBLE);
 				listener.menuOpened();
 			}
 
@@ -110,6 +105,7 @@ public class SlideMenuWidget extends VWindow {
 
 			@Override
 			public void execute() {
+				curtain.getStyle().setVisibility(Visibility.HIDDEN);
 				listener.menuClosed();
 			}
 		});
