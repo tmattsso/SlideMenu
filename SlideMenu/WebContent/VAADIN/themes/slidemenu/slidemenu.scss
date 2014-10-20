@@ -32,5 +32,13 @@
 			position: absolute;
 			overflow: hidden;
 		}
+		
 	}
+		.menuwindow.opening {
+			margin-left:0px !important;
+		}
+		
+		.menuwindow.closing {
+			margin-left: -90% !important;
+		}
 }
