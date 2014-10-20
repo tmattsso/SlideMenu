@@ -11,10 +11,10 @@ import com.vaadin.ui.UI;
 
 @SuppressWarnings("serial")
 @Theme("slidemenu")
-public class FacebookmenuUI extends UI {
+public class SlidemenuUI extends UI {
 
 	@WebServlet(value = "/*", asyncSupported = true)
-	@VaadinServletConfiguration(productionMode = false, ui = FacebookmenuUI.class, widgetset = "org.vaadin.thomas.slidemenu.SlidemenuWidgetset")
+	@VaadinServletConfiguration(productionMode = false, ui = SlidemenuUI.class, widgetset = "org.vaadin.thomas.slidemenu.SlidemenuWidgetset")
 	public static class Servlet extends TouchKitServlet {
 	}
 

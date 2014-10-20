@@ -91,7 +91,9 @@ public class SlideMenuWidget extends VWindow {
 			@Override
 			public void run() {
 				curtain.getStyle().setVisibility(Visibility.VISIBLE);
-				listener.menuOpened();
+				if (listener != null) {
+					listener.menuOpened();
+				}
 			}
 
 		}.schedule(500);
@@ -106,7 +108,9 @@ public class SlideMenuWidget extends VWindow {
 			@Override
 			public void execute() {
 				curtain.getStyle().setVisibility(Visibility.HIDDEN);
-				listener.menuClosed();
+				if (listener != null) {
+					listener.menuClosed();
+				}
 			}
 		});
 	}

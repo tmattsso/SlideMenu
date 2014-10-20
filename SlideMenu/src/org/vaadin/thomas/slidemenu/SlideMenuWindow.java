@@ -25,7 +25,7 @@ public class SlideMenuWindow extends Window {
 
 	private static final long serialVersionUID = 6340196558746178064L;
 
-	private static final String STYLENAME = "menuwindow";
+	private static final String STYLENAME = "slidemenu";
 	private final List<Component> children = new ArrayList<Component>();
 	private final VerticalLayout root;
 
