@@ -4,6 +4,7 @@ import org.vaadin.thomas.slidemenu.SlideMenu;
 import org.vaadin.thomas.slidemenu.SlideMenu.SlideMenuListener;
 import org.vaadin.thomas.slidemenu.SlideMenuView;
 
+import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -43,6 +44,20 @@ public class MenuTestView extends SlideMenuView {
 		Button b = new Button("Dashboard");
 		b.addStyleName(SlideMenu.STYLENAME_BUTTON);
 		getMenu().addComponent(b);
+
+		b.addClickListener(new ClickListener() {
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				getNavigationManager().navigateTo(new NavigationView() {
+					{
+						getMenu().close();
+						setContent(new Label("another view"));
+						setCaption("DashBoard");
+					}
+				});
+			}
+		});
 
 		b = new Button("Inbox");
 		b.addStyleName(SlideMenu.STYLENAME_BUTTON);

@@ -9,6 +9,15 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 
+/**
+ * An enhanced {@link NavigationView} with button to open the {@link SlideMenu}.
+ * <p>
+ * Button will automatically be hidden on navigation to sub-views (displaying
+ * the normal back-link instead).
+ * 
+ * @author thomas
+ *
+ */
 public class SlideMenuView extends NavigationView implements NavigationListener {
 
 	private static final long serialVersionUID = 3952898936850021537L;

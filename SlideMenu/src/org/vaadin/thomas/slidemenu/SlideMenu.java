@@ -186,4 +186,20 @@ public class SlideMenu extends Window {
 		void menuClosed();
 	}
 
+	/**
+	 * Set width of the popup window
+	 */
+	@Override
+	public void setWidth(String width) {
+		super.setWidth(width);
+	}
+
+	/**
+	 * Set width of the popup window
+	 */
+	@Override
+	public void setWidth(float width, Unit unit) {
+		super.setWidth(width, unit);
+	}
+
 }
