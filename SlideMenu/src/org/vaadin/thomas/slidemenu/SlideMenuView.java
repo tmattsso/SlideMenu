@@ -13,13 +13,13 @@ public class SlideMenuView extends NavigationView implements NavigationListener 
 
 	private static final long serialVersionUID = 3952898936850021537L;
 
-	protected SlideMenuWindow menu = new SlideMenuWindow();
+	protected SlideMenu menu = new SlideMenu();
 	protected Button menuButton;
 
 	public SlideMenuView() {
 
 		menuButton = new Button();
-		menuButton.setIcon(FontAwesome.GEARS);
+		menuButton.setIcon(FontAwesome.BARS);
 		menuButton.addClickListener(new ClickListener() {
 
 			private static final long serialVersionUID = 6014031942527721065L;
@@ -42,7 +42,7 @@ public class SlideMenuView extends NavigationView implements NavigationListener 
 		}
 	}
 
-	public SlideMenuWindow getMenu() {
+	public SlideMenu getMenu() {
 		return menu;
 	}
 

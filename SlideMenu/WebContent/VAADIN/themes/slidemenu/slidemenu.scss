@@ -4,7 +4,7 @@
 
   // Insert your own theme rules here
   
-	.menuwindow {
+	.slidemenu {
 		background-color: #ccc;
   
 		.v-window-outerheader {
@@ -34,9 +34,28 @@
 		}
 		
   		transition: transform 500ms;
+  		
+  		
+  		.menubutton {
+  		
+  			line-height: 25px;
+  			
+  			.v-button-wrap {
+  				text-align: left;
+  				
+  				.v-button-caption {
+  					font-size: 14pt;
+  				}
+  			}
+  		}
+  		
+  		.menulabel {
+  			font-size: 14pt;
+			font-weight: 600;
+  		}
 	}
 	
-	.menuwindow.opening {
+	.slidemenu.opening {
 		transform: translate3d(100%, 0,0);
 	}
 	

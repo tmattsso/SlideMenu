@@ -1,11 +1,13 @@
 package org.vaadin.thomas.slidemenu.example;
 
+import org.vaadin.thomas.slidemenu.SlideMenu;
+import org.vaadin.thomas.slidemenu.SlideMenu.SlideMenuListener;
 import org.vaadin.thomas.slidemenu.SlideMenuView;
-import org.vaadin.thomas.slidemenu.SlideMenuWindow.SlideMenuListener;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
@@ -36,7 +38,15 @@ public class MenuTestView extends SlideMenuView {
 		});
 
 		for (int i = 0; i < 30; i++) {
-			final Button d = new Button("dummy");
+			final Component d;
+			if (i % 2 == 0) {
+				d = new Button("Dummy");
+				d.addStyleName(SlideMenu.STYLENAME_BUTTON);
+			} else {
+				d = new Label("Dummy");
+				d.addStyleName(SlideMenu.STYLENAME_LABEL);
+				d.addStyleName("menubutton");
+			}
 			getMenu().addComponent(d);
 		}
 
@@ -55,6 +65,6 @@ public class MenuTestView extends SlideMenuView {
 			}
 		});
 
-		getMenu().setWidth("50%");
+		// getMenu().setWidth("50%");
 	}
 }

@@ -1,13 +1,13 @@
 package org.vaadin.thomas.slidemenu.client;
 
-import org.vaadin.thomas.slidemenu.SlideMenuWindow;
+import org.vaadin.thomas.slidemenu.SlideMenu;
 
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.window.WindowConnector;
 import com.vaadin.shared.ui.Connect;
 
-@Connect(SlideMenuWindow.class)
+@Connect(SlideMenu.class)
 public class MenuConnector extends WindowConnector implements MenuServerRPC {
 
 	private static final long serialVersionUID = -2714633284761401664L;

@@ -21,11 +21,13 @@ import com.vaadin.ui.Window;
  *
  * @author Thomas Mattsson
  */
-public class SlideMenuWindow extends Window {
+public class SlideMenu extends Window {
 
 	private static final long serialVersionUID = 6340196558746178064L;
 
 	private static final String STYLENAME = "slidemenu";
+	public static final String STYLENAME_BUTTON = "menubutton";
+	public static final String STYLENAME_LABEL = "menulabel";
 	private final List<Component> children = new ArrayList<Component>();
 	private final VerticalLayout root;
 
@@ -35,7 +37,7 @@ public class SlideMenuWindow extends Window {
 
 	private Component loadingComponent;
 
-	public SlideMenuWindow() {
+	public SlideMenu() {
 		addStyleName(STYLENAME);
 
 		root = new VerticalLayout();
