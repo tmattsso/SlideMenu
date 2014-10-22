@@ -27,7 +27,7 @@ public class SlideMenu extends Window {
 
 	private static final String STYLENAME = "slidemenu";
 	public static final String STYLENAME_BUTTON = "menubutton";
-	public static final String STYLENAME_LABEL = "menulabel";
+	public static final String STYLENAME_SECTIONLABEL = "menulabel";
 	private final List<Component> children = new ArrayList<Component>();
 	private final VerticalLayout root;
 
