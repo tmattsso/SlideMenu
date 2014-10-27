@@ -14,7 +14,7 @@ import com.vaadin.ui.Button.ClickListener;
  * <p>
  * Button will automatically be hidden on navigation to sub-views (displaying
  * the normal back-link instead).
- * 
+ *
  * @author thomas
  *
  */
@@ -55,14 +55,28 @@ public class SlideMenuView extends NavigationView implements NavigationListener 
 		return menu;
 	}
 
+	/**
+	 * Change the icon for the menu button. Default is {@link FontAwesome#BARS}
+	 *
+	 * @param icon
+	 */
 	public void setMenuIcon(Resource icon) {
 		menuButton.setIcon(icon);
 	}
 
 	@Override
 	public void navigate(NavigationEvent event) {
+
+		// When navigating, do one of two things:
+
 		if (getNavigationManager().getCurrentComponent().equals(this)) {
+			// 1. if navigating back to this view, re-add the menu button to top
+			// left corner
 			setLeftComponent(menuButton);
+		} else {
+			// 2. if navigating away, make sure the menu is closed
+			menu.close();
 		}
+
 	}
 }

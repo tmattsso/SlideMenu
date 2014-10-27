@@ -18,6 +18,9 @@ import com.vaadin.ui.Window;
  * <p>
  * The menu is a {@link Window} component with stripped functionality. Creating
  * an instance of this class will automatically add the menu to the UI.
+ * <p>
+ * A word of warning: enabling {@link Window} features will more than likely
+ * destroy any functionality of the menu.
  *
  * @author Thomas Mattsson
  */
@@ -26,16 +29,39 @@ public class SlideMenu extends Window {
 	private static final long serialVersionUID = 6340196558746178064L;
 
 	private static final String STYLENAME = "slidemenu";
-	public static final String STYLENAME_BUTTON = "menubutton";
-	public static final String STYLENAME_SECTIONLABEL = "menulabel";
-	private final List<Component> children = new ArrayList<Component>();
-	private final VerticalLayout root;
 
+	/**
+	 * A Button style that is smaller than default, with text aligned to the
+	 * left.
+	 */
+	public static final String STYLENAME_BUTTON = "menubutton";
+
+	/**
+	 * A Label style that has slightly bigger font and is bolded.
+	 */
+	public static final String STYLENAME_SECTIONLABEL = "menulabel";
+
+	/**
+	 * Temporary stash for child widgets.
+	 * <p>
+	 * Widgets are added to root layout only after the first open of the menu
+	 * (basically, we lazy load them).
+	 */
+	private final List<Component> children = new ArrayList<Component>();
+
+	/**
+	 * Should layouting be reset on (and re-sent to) the client.
+	 */
 	private boolean clientDirty = false;
 
-	private final List<SlideMenuListener> listeners = new ArrayList<SlideMenuListener>();
+	private final VerticalLayout root;
 
+	/**
+	 * Temp component that is display on first load
+	 */
 	private Component loadingComponent;
+
+	private final List<SlideMenuListener> listeners = new ArrayList<SlideMenuListener>();
 
 	public SlideMenu() {
 		addStyleName(STYLENAME);
@@ -155,6 +181,9 @@ public class SlideMenu extends Window {
 		clientDirty = true;
 	}
 
+	/**
+	 * Re-send all component to client.
+	 */
 	protected void sendChildrenToClient() {
 		if (clientDirty) {
 			root.removeAllComponents();

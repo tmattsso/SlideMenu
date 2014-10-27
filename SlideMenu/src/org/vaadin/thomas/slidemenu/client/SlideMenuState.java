@@ -6,4 +6,5 @@ public class SlideMenuState extends WindowState {
 
 	private static final long serialVersionUID = 1394023893691759480L;
 
+	// nothing here, for now.
 }
