@@ -10,7 +10,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 
 @SuppressWarnings("serial")
-@Theme("slidemenu")
+@Theme("slidemenutheme")
 public class SlidemenuUI extends UI {
 
 	@WebServlet(value = "/*", asyncSupported = true)
